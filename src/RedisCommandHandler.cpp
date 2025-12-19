@@ -74,71 +74,75 @@ RedisCommandHandler::RedisCommandHandler() {}
 
 // Process a Redis command and return the response in RESP FORMAT
 std::string RedisCommandHandler::processCommand(const std::string& command) {
+    auto tokens = parseRespoCommand(command);
+    if (tokens.empty()) {
+        return "-ERR invalid command format\r\n";
+    }
 
-    auto tokens = parseRespoCommand(command);// parse the command into tokens
-    if(tokens.empty()){
-        return "-ERR invalid command format\r\n";   
-    }
-    /*
-    for(auto& t : tokens){
-        std::cout << t << "\n"<< std::endl;
-    }
-    */
     std::string cmd = tokens[0];
-    std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::toupper); // convert command to uppercase
-    std::ostringstream response;// to build the response string
+    std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::toupper);
 
     RedisDatabase& db = RedisDatabase::getInstance();
 
-    // Handle PING command
-    if (cmd == "PING") {
-        if (tokens.size() == 1) {
-            response << "+PONG\r\n";
-        } else {
-            // Return the argument as bulk string
-            response << "$" << tokens[1].size() << "\r\n" << tokens[1] << "\r\n";
-        }
-    }
-    // Handle ECHO command
-    else if (cmd == "ECHO") {
-        if (tokens.size() < 2) {
-            response << "-ERR wrong number of arguments for 'echo' command\r\n";
-        } else {
-            response << "$" << tokens[1].size() << "\r\n" << tokens[1] << "\r\n";
-        }
-    }
-    // Handle SET command
-    else if (cmd == "SET") {
-        if (tokens.size() < 3) {
-            response << "-ERR wrong number of arguments for 'set' command\r\n";
-        } else {
-            // For now, just acknowledge the SET command
-            response << "+OK\r\n";
-        }
-    }
-    // Handle GET command
-    else if (cmd == "GET") {
-        if (tokens.size() < 2) {
-            response << "-ERR wrong number of arguments for 'get' command\r\n";
-        } else {
-            // For now, return nil
-            response << "$-1\r\n";
-        }
-    }
-
-    //hash functions, list functions, set functions, sorted set functions etc.
-    /*
-    PING,ECHO,FLUSHALL
-    SET,GET,KEYS,TYPE,DEL,EXPIRE,RENAME
-    HSET,HGET,HGETALL,HEXISTS,HDEL,HKEYS,HLEN,HVALS,HGETALL,HSETALL
-    LGET,LSET,LPUSH,RPOP,LLEN,LRANGE,LINDEX,LSET
-    */
-    // Handle unknown commands
-    else {
-        response << "-ERR unknown command '" << cmd << "'\r\n";
-    }
-
-    return response.str();
+    // Dispatch to handlers
+    if (cmd == "PING")
+        return handlePing(tokens, db);
+    else if (cmd == "ECHO")
+        return handleEcho(tokens, db);
+    else if (cmd == "FLUSHALL")
+        return handleFlushAll(tokens, db);
+    else if (cmd == "SET")
+        return handleSet(tokens, db);
+    else if (cmd == "GET")
+        return handleGet(tokens, db);
+    else if (cmd == "KEYS")
+        return handleKeys(tokens, db);
+    else if (cmd == "TYPE")
+        return handleType(tokens, db);
+    else if (cmd == "DEL" || cmd == "UNLINK")
+        return handleDel(tokens, db);
+    else if (cmd == "EXPIRE")
+        return handleExpire(tokens, db);
+    else if (cmd == "RENAME")
+        return handleRename(tokens, db);
+    else if (cmd == "LPUSH")
+        return handleLpush(tokens, db);
+    else if (cmd == "LPOP")
+        return handleLpop(tokens, db);
+    else if (cmd == "RPUSH")
+        return handleRpush(tokens, db);
+    else if (cmd == "RPOP")
+        return handleRpop(tokens, db);
+    else if (cmd == "LLEN")
+        return handleLlen(tokens, db);
+    else if (cmd == "LGET")
+        return handleLget(tokens, db);
+    else if (cmd == "LINDEX")
+        return handleLindex(tokens, db);
+    else if (cmd == "LSET")
+        return handleLset(tokens, db);
+    else if (cmd == "LREM")
+        return handleLrem(tokens, db);
+    else if (cmd == "HSET")
+        return handleHset(tokens, db);
+    else if (cmd == "HGET")
+        return handleHget(tokens, db);
+    else if (cmd == "HGETALL")
+        return handleHgetall(tokens, db);
+    else if (cmd == "HEXISTS")
+        return handleHexists(tokens, db);
+    else if (cmd == "HDEL")
+        return handleHdel(tokens, db);
+    else if (cmd == "HKEYS")
+        return handleHkeys(tokens, db);
+    else if (cmd == "HVALS")
+        return handleHvals(tokens, db);
+    else if (cmd == "HLEN")
+        return handleHlen(tokens, db);
+    else if (cmd == "HMSET")
+        return handleHmset(tokens, db);
+    else
+        return "-ERR unknown command '" + cmd + "'\r\n";
 }
 
 
