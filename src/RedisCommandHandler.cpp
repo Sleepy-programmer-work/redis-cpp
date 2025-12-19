@@ -1,4 +1,5 @@
 #include "../include/RedisCommandHandler.h"
+#include "../include/RedisDatabase.h"
 #include <sstream>
 #include <vector>
 #include <string>
@@ -78,14 +79,16 @@ std::string RedisCommandHandler::processCommand(const std::string& command) {
     if(tokens.empty()){
         return "-ERR invalid command format\r\n";   
     }
-
+    /*
     for(auto& t : tokens){
         std::cout << t << "\n"<< std::endl;
     }
-
+    */
     std::string cmd = tokens[0];
     std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::toupper); // convert command to uppercase
     std::ostringstream response;// to build the response string
+
+    RedisDatabase& db = RedisDatabase::getInstance();
 
     // Handle PING command
     if (cmd == "PING") {
@@ -122,6 +125,14 @@ std::string RedisCommandHandler::processCommand(const std::string& command) {
             response << "$-1\r\n";
         }
     }
+
+    //hash functions, list functions, set functions, sorted set functions etc.
+    /*
+    PING,ECHO,FLUSHALL
+    SET,GET,KEYS,TYPE,DEL,EXPIRE,RENAME
+    HSET,HGET,HGETALL,HEXISTS,HDEL,HKEYS,HLEN,HVALS,HGETALL,HSETALL
+    LGET,LSET,LPUSH,RPOP,LLEN,LRANGE,LINDEX,LSET
+    */
     // Handle unknown commands
     else {
         response << "-ERR unknown command '" << cmd << "'\r\n";

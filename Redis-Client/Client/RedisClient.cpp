@@ -10,7 +10,7 @@ Establishing a TCP Connection to Redis (RedisClient)
 */
 
 
-#include "RedisClient.h"
+#include "../include/RedisClient.h"
 
 RedisClient::RedisClient(const std::string &host, int port) 
     : host(host), port(port), sockfd(-1) {}

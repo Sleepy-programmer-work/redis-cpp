@@ -1,9 +1,10 @@
 # Compiler
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -Wall -Wextra -std=c++17 -I./include
 
 # Directories
 SRC_DIR = .
+INCLUDE_DIR = include
 BUILD_DIR = build
 BIN_DIR = ../..
 
