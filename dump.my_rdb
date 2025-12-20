@@ -1,156 +1,57 @@
-KV username john_doe
+KV mynewkey value
+KV user:1 john
+KV testkey testvalue
+KV cache_item article_123_content_cached
+KV json_data {name:John,age:30,city:Boston}
+KV float_value 3.14159
+KV temp_data temporary_value_to_delete
 KV email user@example.com
 KV age 28
+KV large_text Lorem
 KV status active
-KV last_login 2025-12-20
-KV api_key sk_test_12345678abcdef
-KV theme dark_mode
-KV session_id sess_abc123xyz789
-KV counter 42
-KV score 9850
-KV greeting Hello World
-KV description This is a test Redis database
-KV old_key_to_rename original_value
-KV temp_data temporary_value_to_delete
-KV boolean_flag true
-KV float_value 3.14159
-KV large_text Lorem ipsum dolor sit amet consectetur adipiscing elit
-KV json_data {name:John,age:30,city:Boston}
-KV cache_item article_123_content_cached
 KV user:profile:name Alice
-LIST tasks
-  ITEM Complete project documentation
-  ITEM Review code changes
-  ITEM Deploy to production
-  ITEM Update README
-  ITEM Run tests
-  ITEM Optimize database
-  ITEM Write unit tests
-  ITEM Refactor code
-LIST shopping_cart
+KV description This
+KV old_key_to_rename original_value
+KV last_login 2025-12-20
+KV session_id sess_abc123xyz789
+KV boolean_flag true
+KV api_key sk_test_12345678abcdef
+KV product:1 redis book
+KV theme dark_mode
+KV key1 value1
+KV counter 42
+KV greeting Hello
+KV username john_doe
+KV score 9850
+LIST mylist
   ITEM apple
   ITEM banana
-  ITEM milk
-  ITEM bread
-  ITEM cheese
-  ITEM butter
-  ITEM eggs
-LIST notifications
-  ITEM User logged in from new device
-  ITEM Payment received
-  ITEM System update available
-  ITEM New message from admin
-  ITEM Database backup completed
-  ITEM Security alert triggered
-LIST logs
-  ITEM 2025-12-20 10:30:45 - Server started
-  ITEM 2025-12-20 10:31:12 - Database connected
-  ITEM 2025-12-20 10:32:05 - Client connected
-  ITEM 2025-12-20 10:33:22 - Data loaded
-  ITEM 2025-12-20 10:35:10 - Query executed
-  ITEM 2025-12-20 10:36:45 - Results cached
-LIST duplicate_items
   ITEM apple
-  ITEM banana
+  ITEM mango
+  ITEM apple
+  ITEM mango
   ITEM apple
   ITEM orange
-  ITEM apple
-  ITEM banana
-LIST queue_pending
-  ITEM job_001_process_payment
-  ITEM job_002_send_email
-  ITEM job_003_generate_report
-  ITEM job_004_sync_data
+  ITEM orange
 LIST numbers
-  ITEM 10
-  ITEM 20
-  ITEM 30
-  ITEM 40
-  ITEM 50
-HASH user:1000
-  FIELD name Alice Johnson
-  FIELD email alice@example.com
+LIST queue_pending
+LIST duplicate_items
+LIST logs
+LIST notifications
+LIST shopping_cart
+LIST tasks
+HASH user:profile
   FIELD age 30
-  FIELD city New York
-  FIELD phone 555-0100
-  FIELD role admin
-  FIELD status active
-  FIELD created_at 2025-01-15
-  FIELD last_updated 2025-12-20
-HASH user:1001
-  FIELD name Bob Smith
-  FIELD email bob@example.com
-  FIELD age 25
-  FIELD city San Francisco
-  FIELD phone 555-0101
-  FIELD role user
-  FIELD status active
-  FIELD created_at 2025-03-20
-  FIELD last_updated 2025-12-19
-HASH user:1002
-  FIELD name Carol Davis
-  FIELD email carol@example.com
-  FIELD age 35
-  FIELD city Chicago
-  FIELD phone 555-0102
-  FIELD role moderator
-  FIELD status inactive
-  FIELD created_at 2025-02-10
-  FIELD last_updated 2025-11-30
-HASH product:001
-  FIELD name Laptop
-  FIELD price 999.99
-  FIELD stock 15
-  FIELD category Electronics
-  FIELD color Silver
-  FIELD brand TechCorp
-  FIELD sku SKU-001-LAP
-  FIELD rating 4.5
-HASH product:002
-  FIELD name Wireless Mouse
-  FIELD price 29.99
-  FIELD stock 150
-  FIELD category Accessories
-  FIELD color Black
-  FIELD brand TechCorp
-  FIELD sku SKU-002-MOU
-  FIELD rating 4.2
-HASH product:003
-  FIELD name USB-C Cable
-  FIELD price 14.99
-  FIELD stock 500
-  FIELD category Accessories
-  FIELD color White
-  FIELD brand TechCorp
-  FIELD sku SKU-003-USB
-  FIELD rating 4.7
-HASH settings:app
-  FIELD max_connections 1000
-  FIELD timeout_seconds 300
-  FIELD debug_mode false
-  FIELD log_level INFO
-  FIELD version 1.2.3
-  FIELD environment production
-  FIELD enable_caching true
-  FIELD cache_ttl 3600
-HASH settings:database
-  FIELD host localhost
-  FIELD port 6379
-  FIELD persistence_enabled true
-  FIELD backup_interval 300
-  FIELD max_memory 512MB
-  FIELD eviction_policy lru
+  FIELD name john
+HASH myhash
+  FIELD field1 value1
 HASH session:sess_abc123
-  FIELD user_id 1000
-  FIELD ip_address 192.168.1.100
-  FIELD user_agent Mozilla/5.0
-  FIELD created_at 2025-12-20T10:30:00
-  FIELD expires_at 2025-12-20T14:30:00
-  FIELD authenticated true
+HASH settings:app
+HASH settings:database
+HASH product:002
+HASH product:001
+HASH user:1002
+HASH user:1001
 HASH metrics:daily:2025-12-20
-  FIELD requests_total 5420
-  FIELD requests_successful 5380
-  FIELD requests_failed 40
-  FIELD avg_response_time 245
-  FIELD peak_concurrent_users 342
-  FIELD database_queries 12450
+HASH product:003
+HASH user:1000
