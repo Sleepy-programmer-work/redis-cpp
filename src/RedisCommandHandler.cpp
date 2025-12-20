@@ -93,6 +93,7 @@ std::string RedisCommandHandler::processCommand(const std::string& command) {
         return handleFlushAll(tokens, db);
     else if (cmd == "SET")
         return handleSet(tokens, db);
+
     else if (cmd == "GET")
         return handleGet(tokens, db);
     else if (cmd == "KEYS")
@@ -104,6 +105,7 @@ std::string RedisCommandHandler::processCommand(const std::string& command) {
     else if (cmd == "EXPIRE")
         return handleExpire(tokens, db);
     else if (cmd == "RENAME")
+
         return handleRename(tokens, db);
     else if (cmd == "LPUSH")
         return handleLpush(tokens, db);
@@ -123,6 +125,7 @@ std::string RedisCommandHandler::processCommand(const std::string& command) {
         return handleLset(tokens, db);
     else if (cmd == "LREM")
         return handleLrem(tokens, db);
+
     else if (cmd == "HSET")
         return handleHset(tokens, db);
     else if (cmd == "HGET")
@@ -141,6 +144,7 @@ std::string RedisCommandHandler::processCommand(const std::string& command) {
         return handleHlen(tokens, db);
     else if (cmd == "HMSET")
         return handleHmset(tokens, db);
+        
     else
         return "-ERR unknown command '" + cmd + "'\r\n";
 }

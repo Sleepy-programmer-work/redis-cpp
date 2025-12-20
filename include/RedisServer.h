@@ -15,7 +15,7 @@ class RedisServer {
         int server_socket;
         std::atomic<bool> running;
 
-        void setupSignalHandlers();// setup signal handlers for graceful shutdown
+        void setupSignalHandlers();// for graceful shutdown
 
 };  
 
